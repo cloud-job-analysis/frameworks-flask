@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, jsonify
 import json
+import time
 
 # create flask app
 app = Flask(__name__)
@@ -9,7 +10,8 @@ app = Flask(__name__)
 # index route, shows index.html view
 @app.route('/')
 def index():
-    return render_template('index.html')
+    data = {"time": time.time()}
+    return jsonify(data)
 
 # endpoint for simple file IO
 # return file handle to work with
