@@ -1,6 +1,9 @@
 # ./app.py
 
 from flask import Flask, render_template, request, jsonify
+from random import *
+from time import * 
+
 import json
 import time
 
@@ -43,6 +46,62 @@ def fileWork():
     fp.close()
     data = {'id' : True}
     return jsonify(data)
+
+@app.route('/timsort', methods=['GET'])
+def timsort():
+    arr = request.args.get('arr')
+    return arr.sort()
+
+@app.route('/bogosort', methods=['GET'])
+def bogosort():
+    arr = request.args.get('arr')
+    while not inorder(x):
+        shuffle(x)
+    return x
+
+def inorder(x):
+    i = 0
+    j = len(x)
+    while i + 1 < j:
+        if x[i] > x[i + 1]:
+            return False
+        i += 1
+    return True
+
+@app.route('/insertionsort', methods=['GET'])
+def insertionsort():
+    arr = request.args.get('arr')
+    for i in range(1, len(arr)): 
+        key = arr[i] 
+        j = i-1
+        while j >= 0 and key < arr[j] : 
+                arr[j + 1] = arr[j] 
+                j -= 1
+        arr[j + 1] = key
+    return arr
+
+@app.route('/bubblesort', methods=['GET'])
+def bubblesort():
+    arr = request.args.get('arr')
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1] :
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+@app.route('/wordcount', methods=['GET'])
+def wordcount():
+    fpath = request.args.get('fpath')
+    f = open(fpath, 'r')
+    word_count = {}
+    for line in f.readlines():
+        for word in line.split():
+            try:
+                word_count[word] = 1
+            except:
+                word_count += 1
+    return word_count
 
 # run Flask app in debug mode
 app.run(debug=True)
