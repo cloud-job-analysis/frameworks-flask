@@ -49,12 +49,20 @@ def fileWork():
 
 @app.route('/timsort', methods=['GET'])
 def timsort():
-    arr = request.args.get('arr')
+    fpath = request.args.get('fpath')
+    f = open(fpath)
+    arr = []
+    for num in f.readlines():
+        arr.append(int(num))
     return arr.sort()
 
 @app.route('/bogosort', methods=['GET'])
 def bogosort():
-    arr = request.args.get('arr')
+    fpath = request.args.get('fpath')
+    f = open(fpath)
+    arr = []
+    for num in f.readlines():
+        arr.append(int(num))
     while not inorder(x):
         shuffle(x)
     return x
@@ -70,7 +78,11 @@ def inorder(x):
 
 @app.route('/insertionsort', methods=['GET'])
 def insertionsort():
-    arr = request.args.get('arr')
+    fpath = request.args.get('fpath')
+    f = open(fpath)
+    arr = []
+    for num in f.readlines():
+        arr.append(int(num))
     for i in range(1, len(arr)): 
         key = arr[i] 
         j = i-1
@@ -82,7 +94,11 @@ def insertionsort():
 
 @app.route('/bubblesort', methods=['GET'])
 def bubblesort():
-    arr = request.args.get('arr')
+    fpath = request.args.get('fpath')
+    f = open(fpath)
+    arr = []
+    for num in f.readlines():
+        arr.append(int(num))
     n = len(arr)
     for i in range(n):
         for j in range(0, n-i-1):
